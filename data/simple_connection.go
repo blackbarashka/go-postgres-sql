@@ -9,6 +9,7 @@ import (
 )
 
 func CheckConnection() {
+	//change.
 	ctx := context.Background()
 	conn, err := pgx.Connect(ctx, "postgres://postgres:admin@localhost:5432/postgres")
 	if err != nil {
