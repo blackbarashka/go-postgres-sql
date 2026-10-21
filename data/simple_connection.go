@@ -3,21 +3,20 @@ package data
 import (
 	"context"
 	"fmt"
-	"log"
 
 	"github.com/jackc/pgx/v5"
 )
 
-func CheckConnection() {
+func CheckConnection(ctx context.Context) (*pgx.Conn, error) {
 	//change.
-	ctx := context.Background()
 	conn, err := pgx.Connect(ctx, "postgres://postgres:admin@localhost:5432/postgres")
 	if err != nil {
-		log.Fatal(err)
+		return nil, err
 	}
 	err_ := conn.Ping(ctx)
 	if err_ != nil {
-		log.Fatal(err_)
+		return nil, err_
 	}
 	fmt.Println("Successfully connected to postgres")
+	return conn, err
 }
